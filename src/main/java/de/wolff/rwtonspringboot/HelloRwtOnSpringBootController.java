@@ -1,4 +1,3 @@
-// Copyright (c) 2022 Benjamin Wolff <kontakt@wolff.software>. All rights reserved.
 package de.wolff.rwtonspringboot;
 
 import org.springframework.stereotype.Controller;
