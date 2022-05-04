@@ -1,0 +1,41 @@
+plugins {
+	id 'org.springframework.boot' version '2.6.7'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'java'
+	id 'war'
+}
+
+group = 'de.wolff'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	// Spring Boot dependencies
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+	// RWT Dependencies
+	implementation 'org.eclipse.rap:org.eclipse.rap.rwt:3.20.0'
+	implementation 'org.eclipse.rap:org.eclipse.rap.jface:3.20.0'
+	// These Eclipse core dependencies are required by JFace
+	implementation 'org.eclipse.platform:org.eclipse.core.runtime:3.24.100'
+	implementation 'org.eclipse.platform:org.eclipse.core.commands:3.10.100'
+
+	// Dependencies for using RWT TextFixture in unit tests (requires the vintage JUnit 4 engine)
+	testImplementation 'org.eclipse.rap:org.eclipse.rap.rwt.testfixture:3.20.0'
+	testImplementation 'org.junit.vintage:junit-vintage-engine'
+}
+
+tasks.named('test') {
+
+	// The RWT TextFixtures required the JUnit4 API and engine. We therefore configure the unit tests to be executed
+	// using the JUnit vintage engine here.
+	useJUnitPlatform() {
+		includeEngines 'junit-vintage'
+	}
+}
